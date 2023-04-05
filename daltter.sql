@@ -2,10 +2,10 @@
 -- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Хост: 127.0.0.1:3306
--- Время создания: Мар 28 2023 г., 13:14
--- Версия сервера: 8.0.30
--- Версия PHP: 8.1.9
+-- Host: 127.0.0.1:3306
+-- Generation Time: Apr 05, 2023 at 11:32 PM
+-- Server version: 8.0.30
+-- PHP Version: 8.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- База данных: `daltter`
+-- Database: `daltter`
 --
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `authentication`
+-- Table structure for table `authentication`
 --
 
 CREATE TABLE `authentication` (
@@ -36,7 +36,7 @@ CREATE TABLE `authentication` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `balance`
+-- Table structure for table `balance`
 --
 
 CREATE TABLE `balance` (
@@ -48,7 +48,7 @@ CREATE TABLE `balance` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `history_of_transactions`
+-- Table structure for table `history_of_transactions`
 --
 
 CREATE TABLE `history_of_transactions` (
@@ -62,7 +62,7 @@ CREATE TABLE `history_of_transactions` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `statistics`
+-- Table structure for table `statistics`
 --
 
 CREATE TABLE `statistics` (
@@ -76,7 +76,7 @@ CREATE TABLE `statistics` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `subscription`
+-- Table structure for table `subscription`
 --
 
 CREATE TABLE `subscription` (
@@ -92,13 +92,15 @@ CREATE TABLE `subscription` (
   `amount_of_messages_per_day` int NOT NULL,
   `user_id` int NOT NULL,
   `mode` varchar(2) DEFAULT NULL,
-  `paused` tinyint DEFAULT '0'
+  `paused` tinyint DEFAULT '0',
+  `expired` tinyint NOT NULL DEFAULT '0',
+  `statistics_id` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `subscription_statistics`
+-- Table structure for table `subscription_statistics`
 --
 
 CREATE TABLE `subscription_statistics` (
@@ -106,14 +108,13 @@ CREATE TABLE `subscription_statistics` (
   `visits` int DEFAULT '0',
   `url` varchar(32) NOT NULL,
   `date` date NOT NULL,
-  `formatted_url` varchar(64) DEFAULT NULL,
-  `sub_id` int DEFAULT NULL
+  `formatted_url` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `sub_orders`
+-- Table structure for table `sub_orders`
 --
 
 CREATE TABLE `sub_orders` (
@@ -128,7 +129,7 @@ CREATE TABLE `sub_orders` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `user_info`
+-- Table structure for table `user_info`
 --
 
 CREATE TABLE `user_info` (
@@ -145,7 +146,7 @@ CREATE TABLE `user_info` (
 -- --------------------------------------------------------
 
 --
--- Структура таблицы `verification_token`
+-- Table structure for table `verification_token`
 --
 
 CREATE TABLE `verification_token` (
@@ -157,118 +158,118 @@ CREATE TABLE `verification_token` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
--- Индексы сохранённых таблиц
+-- Indexes for dumped tables
 --
 
 --
--- Индексы таблицы `authentication`
+-- Indexes for table `authentication`
 --
 ALTER TABLE `authentication`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `balance`
+-- Indexes for table `balance`
 --
 ALTER TABLE `balance`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `history_of_transactions`
+-- Indexes for table `history_of_transactions`
 --
 ALTER TABLE `history_of_transactions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `statistics`
+-- Indexes for table `statistics`
 --
 ALTER TABLE `statistics`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `subscription`
+-- Indexes for table `subscription`
 --
 ALTER TABLE `subscription`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `subscription_statistics`
+-- Indexes for table `subscription_statistics`
 --
 ALTER TABLE `subscription_statistics`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `sub_orders`
+-- Indexes for table `sub_orders`
 --
 ALTER TABLE `sub_orders`
   ADD PRIMARY KEY (`id`);
 
 --
--- Индексы таблицы `user_info`
+-- Indexes for table `user_info`
 --
 ALTER TABLE `user_info`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `email_UNIQUE` (`email`);
 
 --
--- Индексы таблицы `verification_token`
+-- Indexes for table `verification_token`
 --
 ALTER TABLE `verification_token`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT для сохранённых таблиц
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT для таблицы `authentication`
+-- AUTO_INCREMENT for table `authentication`
 --
 ALTER TABLE `authentication`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `balance`
+-- AUTO_INCREMENT for table `balance`
 --
 ALTER TABLE `balance`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `history_of_transactions`
+-- AUTO_INCREMENT for table `history_of_transactions`
 --
 ALTER TABLE `history_of_transactions`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `statistics`
+-- AUTO_INCREMENT for table `statistics`
 --
 ALTER TABLE `statistics`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `subscription`
+-- AUTO_INCREMENT for table `subscription`
 --
 ALTER TABLE `subscription`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `subscription_statistics`
+-- AUTO_INCREMENT for table `subscription_statistics`
 --
 ALTER TABLE `subscription_statistics`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `sub_orders`
+-- AUTO_INCREMENT for table `sub_orders`
 --
 ALTER TABLE `sub_orders`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `user_info`
+-- AUTO_INCREMENT for table `user_info`
 --
 ALTER TABLE `user_info`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT для таблицы `verification_token`
+-- AUTO_INCREMENT for table `verification_token`
 --
 ALTER TABLE `verification_token`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
